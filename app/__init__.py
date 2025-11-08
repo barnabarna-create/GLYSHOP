@@ -11,6 +11,7 @@ from .funcs import mail, send_confirmation_email, fulfill_order
 from dotenv import load_dotenv
 from .admin.routes import admin
 import random
+from flask_migrate import Migrate
 
 
 load_dotenv()
@@ -35,7 +36,7 @@ login_manager.init_app(app)
 
 with app.app_context():
 	db.create_all()
-
+migrate = Migrate(app, db)
 @app.context_processor
 def inject_now():
 	""" sends datetime to templates as 'now' """
