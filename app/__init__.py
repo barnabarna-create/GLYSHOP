@@ -12,11 +12,13 @@ from dotenv import load_dotenv
 from .admin.routes import admin
 import random
 from flask_migrate import Migrate
+from config import Config
 
 
 load_dotenv()
 app = Flask(__name__)
 app.register_blueprint(admin)
+app.config.from_object(Config)
 
 app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DB_URI"]
